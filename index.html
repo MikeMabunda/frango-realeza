@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRANGO REALEZA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER E NAVEGAÇÃO -->
+    <header class="header">
+        <div class="container header-container">
+           <img src="logo.png" alt="Frango Realeza" class="logo">
+                <div class="logo-text">
+                    <h1>FRANGO REALEZA</h1>
+                    <p>Coma como um Rei</p>
+        </div>
+    
+            <!-- Barra de Pesquisa -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar produtos..." class="search-input">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- Navegação -->
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link active" onclick="showPage('home')">Início</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('catalog')">Catálogo</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('about')">Sobre Nós</a></li>
+                    <li><a href="#" class="nav-link" onclick="showPage('profile')">Perfil</a></li>
+                    <li><a href="#" class="nav-link" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> (<span id="cartCount">0</span>)</a></li>
+                </ul>
+            </nav>
+
+            <!-- Menu Hamburger -->
+            <button class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- PÁGINA INICIAL -->
+    <section id="home" class="page active">
+        <!-- Banner Principal -->
+        <div class="banner">
+            <div class="banner-content">
+                <h1>Bem-vindo ao FRANGO REALEZA</h1>
+                <p>Os melhores frangos frescos da região, entregues na sua porta</p>
+                <button class="btn btn-primary" onclick="showPage('catalog')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- Anúncios Especiais -->
+        <section class="ads-section">
+            <h2>Promoções Especiais</h2>
+            <div class="ads-container">
+                <div class="ad-card">
+                    <div class="ad-icon">⚡</div>
+                    <h3>20% OFF</h3>
+                    <p>Frango Congelado</p>
+                </div>
+                <div class="ad-card">
+                    <div class="ad-icon">🎁</div>
+                    <h3>Brinde Grátis</h3>
+                    <p>Compre 15 frangos e ganhe um brinde exclusivo!</p>
+                </div>
+                <div class="ad-card">
+                    <div class="ad-icon">🚚</div>
+                    <h3>Entrega Grátis</h3>
+                    <p>Para Machava km15, Patrice, Singathela e T-3</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produtos em Destaque -->
+        <section class="featured-section">
+            <h2>Produtos em Destaque</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Preenchido por JavaScript -->
+            </div>
+        </section>
+    </section>
+
+    <!-- PÁGINA CATÁLOGO -->
+    <section id="catalog" class="page">
+        <div class="container">
+            <h1>Catálogo de Produtos</h1>
+            
+            <!-- Filtros -->
+            <div class="filters">
+                <h3>Filtrar por:</h3>
+                <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
+                <button class="filter-btn" onclick="filterProducts('frango-vivo')">Frango Vivo</button>
+                <button class="filter-btn" onclick="filterProducts('frango-congelado')">Frango Congelado</button>
+                <button class="filter-btn" onclick="filterProducts('caixa')">Caixa</button>
+            </div>
+
+            <!-- Grade de Produtos -->
+            <div class="products-grid" id="catalogProducts">
+                <!-- Preenchido por JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PÁGINA SOBRE NÓS -->
+    <section id="about" class="page">
+        <div class="container">
+            <h1>Sobre FRANGO REALEZA</h1>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Qualidade e Confiança</h2>
+                    <p>A FRANGO REALEZA é a sua melhor opção para frango fresco e de qualidade. Trabalharamos para fornecer produtos de excelência para sua família.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>100% Fresco</h3>
+                            <p>Congelado no mesmo dia do abate</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-certificate"></i>
+                            <h3>Certificado</h3>
+                            <p>Rastreabilidade garantida</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-headset"></i>
+                            <h3>Suporte 24h</h3>
+                            <p>Atendimento ao cliente sempre disponível</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Criação Sustentável</h3>
+                            <p>Foco no bem-estar animal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat">
+                        <h3>10+</h3>
+                        <p>Clientes Satisfeitos</p>
+                    </div>
+                    <div class="stat">
+                        <h3>2+</h3>
+                        <p>Toneladas/Ano</p>
+                    </div>
+                    <div class="stat">
+                        <h3>99%</h3>
+                        <p>Taxa de Satisfação</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contato -->
+            <div class="contact-section">
+                <h2>Entre em Contato</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <p>(+258) 85 753 4125</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>contato@frangorealeza.com.mz</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Machava km15, Matola</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PÁGINA PERFIL -->
+    <section id="profile" class="page">
+        <div class="container">
+            <h1>Meu Perfil</h1>
+            
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="userName">Mike Mabunda</h2>
+                            <p id="userEmail">Mike@example.com</p>
+                            <button class="btn btn-secondary" onclick="editProfile()">Editar Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</h3>
+                        <p id="userAddress">T-3, Matola</p>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3><i class="fas fa-phone"></i> Contato</h3>
+                        <p id="userPhone">(+258) 84 862 8400</p>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3><i class="fas fa-history"></i> Histórico de Compras</h3>
+                        <div id="orderHistory">
+                            <div class="order-item">
+                                <p><strong>Pedido #001</strong> - MZN 3200,00 - 15/04/2026</p>
+                                <small>10 Frangos Congelados</small>
+                            </div>
+                            <div class="order-item">
+                                <p><strong>Pedido #002</strong> - MZN 960,00 - 10/04/2026</p>
+                                <small>3 Frangos Congelados</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3><i class="fas fa-ticket-alt"></i> Cupons Disponíveis</h3>
+                        <div class="coupon">
+                            <span>BEMVINDO</span>
+                            <p>5% de desconto na primeira compra</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-danger" onclick="logout()">Sair da Conta</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARRINHO DE COMPRAS -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleCart()">&times;</span>
+            <h2>🛒 Meu Carrinho</h2>
+            <div id="cartItems"></div>
+            <div class="cart-summary">
+                <h3>Total: <span id="cartTotal">MZN 0,00</span></h3>
+                <button class="btn btn-primary" onclick="checkout()" id="checkoutBtn">Finalizar Compra</button>
+                <button class="btn btn-secondary" onclick="toggleCart()">Continuar Comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>FRANGO REALEZA</h4>
+                    <p>Fornecemos os melhores frangos frescos para sua família.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('catalog')">Catálogo</a></li>
+                        <li><a href="#" onclick="showPage('about')">Sobre Nós</a></li>
+                        <li><a href="#" onclick="showPage('profile')">Minha Conta</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Atendimento</h4>
+                    <p>Seg-Sex: 8h às 18h</p>
+                    <p>Sáb: 8h às 14h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FRANGO REALEZA. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
