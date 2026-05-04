@@ -191,7 +191,7 @@
                         <div class="profile-info">
                             <h2 id="userName">Mike Mabunda</h2>
                             <p id="userEmail">Mike@example.com</p>
-                            <button class="btn btn-secondary" onclick="editProfile()">Editar Perfil</button>
+                            <button class="btn btn-secondary" onclick="openEditProfileModal()">Editar Perfil</button>
                         </div>
                     </div>
 
@@ -217,6 +217,9 @@
                                 <small>3 Frangos Congelados</small>
                             </div>
                         </div>
+                        <button class="btn btn-danger-outline" onclick="clearOrderHistory()" style="width: 100%; margin-top: 15px;">
+                            <i class="fas fa-trash"></i> Eliminar Histórico
+                        </button>
                     </div>
 
                     <div class="profile-section">
@@ -232,6 +235,42 @@
             </div>
         </div>
     </section>
+
+    <!-- MODAL DE EDIÇÃO DE PERFIL -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content edit-profile-modal">
+            <span class="close" onclick="closeEditProfileModal()">&times;</span>
+            <h2>✏️ Editar Perfil</h2>
+            
+            <form id="editProfileForm" onsubmit="saveProfile(event)">
+                <div class="form-group">
+                    <label for="editName">Nome Completo</label>
+                    <input type="text" id="editName" name="name" required placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="editPhone">Número de Telefone</label>
+                    <input type="tel" id="editPhone" name="phone" required placeholder="(+258) 84 862 8400">
+                    <small>Formato: (+258) XX XXX XXXX</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" name="email" required placeholder="seu@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="editAddress">Endereço de Entrega</label>
+                    <input type="text" id="editAddress" name="address" required placeholder="Ex: T-3, Matola">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar Alterações</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditProfileModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- CARRINHO DE COMPRAS -->
     <div id="cartModal" class="modal">

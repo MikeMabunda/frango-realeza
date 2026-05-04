@@ -481,6 +481,9 @@ document.addEventListener('DOMContentLoaded', function() {
     useCart();
     updateCartCount();
     
+    // Carrega dados do perfil
+    loadProfileData();
+    
     // Renderiza produtos iniciais
     renderProducts(produtos.slice(0, 6), 'featuredProducts');
 });
@@ -534,12 +537,70 @@ document.addEventListener('click', function(event) {
 // FUNÇÕES DE PERFIL
 // ============================================
 
-function editProfile() {
-    const newName = prompt("Digite seu novo nome:", document.getElementById('userName').textContent);
-    if (newName && newName.trim() !== '') {
-        document.getElementById('userName').textContent = newName;
-        localStorage.setItem('userName', newName);
-        showNotification('Perfil atualizado!');
+function openEditProfileModal() {
+    const modal = document.getElementById('editProfileModal');
+    
+    // Preenche o formulário com dados atuais
+    document.getElementById('editName').value = document.getElementById('userName').textContent || '';
+    document.getElementById('editPhone').value = document.getElementById('userPhone').textContent || '';
+    document.getElementById('editEmail').value = document.getElementById('userEmail').textContent || '';
+    document.getElementById('editAddress').value = document.getElementById('userAddress').textContent || '';
+    
+    modal.style.display = 'block';
+}
+
+function closeEditProfileModal() {
+    const modal = document.getElementById('editProfileModal');
+    modal.style.display = 'none';
+}
+
+function saveProfile(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('editName').value.trim();
+    const phone = document.getElementById('editPhone').value.trim();
+    const email = document.getElementById('editEmail').value.trim();
+    const address = document.getElementById('editAddress').value.trim();
+    
+    // Validações
+    if (!name || !phone || !email || !address) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+    }
+    
+    if (!email.includes('@')) {
+        alert('Por favor, insira um email válido!');
+        return;
+    }
+    
+    // Atualiza a página com os novos dados
+    document.getElementById('userName').textContent = name;
+    document.getElementById('userPhone').textContent = phone;
+    document.getElementById('userEmail').textContent = email;
+    document.getElementById('userAddress').textContent = address;
+    
+    // Salva no localStorage
+    localStorage.setItem('userName', name);
+    localStorage.setItem('userPhone', phone);
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userAddress', address);
+    
+    // Fecha o modal
+    closeEditProfileModal();
+    
+    // Mostra notificação
+    showNotification('✅ Perfil atualizado com sucesso!');
+}
+
+function clearOrderHistory() {
+    if (confirm('Tem certeza que deseja eliminar todo o histórico de compras? Esta ação não pode ser desfeita.')) {
+        const orderHistory = document.getElementById('orderHistory');
+        orderHistory.innerHTML = '<p style="text-align: center; color: var(--gray-color); padding: 20px;">Nenhum pedido ainda.</p>';
+        
+        // Limpa do localStorage
+        localStorage.removeItem('orderHistory');
+        
+        showNotification('🗑️ Histórico de compras eliminado!');
     }
 }
 
@@ -554,12 +615,23 @@ function logout() {
 // Carrega dados do perfil
 function loadProfileData() {
     const savedName = localStorage.getItem('userName');
-    if (savedName) {
-        document.getElementById('userName').textContent = savedName;
-    }
+    const savedPhone = localStorage.getItem('userPhone');
+    const savedEmail = localStorage.getItem('userEmail');
+    const savedAddress = localStorage.getItem('userAddress');
+    
+    if (savedName) document.getElementById('userName').textContent = savedName;
+    if (savedPhone) document.getElementById('userPhone').textContent = savedPhone;
+    if (savedEmail) document.getElementById('userEmail').textContent = savedEmail;
+    if (savedAddress) document.getElementById('userAddress').textContent = savedAddress;
 }
 
-document.addEventListener('DOMContentLoaded', loadProfileData);
+// Fechar modal ao clicar fora
+window.addEventListener('click', function(event) {
+    const editProfileModal = document.getElementById('editProfileModal');
+    if (event.target === editProfileModal) {
+        editProfileModal.style.display = 'none';
+    }
+});
 
 // ============================================
 // NOTIFICAÇÕES
