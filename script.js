@@ -341,7 +341,7 @@ Agende a sua entrega comigo!`;
     const mensagemCodificada = encodeURIComponent(mensagem);
     
     // Link do WhatsApp Web (seu número: +258848628400)
-    const whatsappLink = `https://wa.me/258848628400?text=${mensagemCodificada}`;
+    const whatsappLink = `https://wa.me/258857534125?text=${mensagemCodificada}`;
     
     // Abre em nova aba
     window.open(whatsappLink, '_blank');
