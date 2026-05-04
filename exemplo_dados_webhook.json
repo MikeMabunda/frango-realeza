@@ -1,0 +1,18 @@
+{
+  "timestamp": "04/05/2026 14:30:45",
+  "cliente": "João Silva",
+  "itens": [
+    {
+      "nome": "Frango Vivo",
+      "quantidade": 2,
+      "preco": "290.00"
+    },
+    {
+      "nome": "Caixa de Frango",
+      "quantidade": 1,
+      "preco": "3000.00"
+    }
+  ],
+  "total": "3580.00",
+  "status": "Novo Pedido"
+}

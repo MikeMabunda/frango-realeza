@@ -262,11 +262,96 @@ function checkout() {
     const mensagem = `Pedido confirmado! Total: MZN ${total.toFixed(2)}\n\nObrigado pela compra! Você receberá seu pedido em breve.`;
     alert(mensagem);
     
+    // ESCOLHA UMA OPÇÃO:
+    // sendPurchaseNotification(total);  // ← Opção 1: Automático via Webhook (requer configuração Make.com)
+    sendWhatsAppWeb();  // ← Opção 2: WhatsApp Web (100% gratuito, sem config!)
+}
+
+// ============================================
+// NOTIFICAÇÃO DE COMPRA VIA WHATSAPP
+// ============================================
+
+// 🔹 OPÇÃO 1: Enviar para Webhook (Automático - Requer Configuração)
+function sendPurchaseNotification(total) {
+    // Substituir WEBHOOK_URL com a URL do seu webhook do Make.com
+    const WEBHOOK_URL = 'INSIRA_AQUI_SUA_URL_DO_WEBHOOK';
+    
+    // Prepara os dados da compra
+    const purchaseData = {
+        timestamp: new Date().toLocaleString('pt-BR'),
+        cliente: document.getElementById('userName')?.textContent || 'Cliente Anônimo',
+        itens: carrinho.map(item => ({
+            nome: item.nome,
+            quantidade: item.quantidade,
+            preco: (item.promocao || item.preco).toFixed(2)
+        })),
+        total: total.toFixed(2),
+        status: 'Novo Pedido'
+    };
+    
+    // Envia os dados para o webhook
+    fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(purchaseData)
+    })
+    .catch(error => {
+        console.log('Notificação enviada (ou em processamento)');
+    });
+}
+
+// 🔹 OPÇÃO 2: Enviar para WhatsApp Web (Gratuito - Sem Configuração!)
+function sendWhatsAppWeb() {
+    if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+    }
+    
+    // Monta string de items
+    let itemsText = '';
+    carrinho.forEach(item => {
+        const preco = item.promocao || item.preco;
+        const total = (preco * item.quantidade).toFixed(2);
+        itemsText += `\n• ${item.nome} x${item.quantidade} = MZN ${total}`;
+    });
+    
+    // Calcula total
+    const total = carrinho.reduce((sum, item) => {
+        const preco = item.promocao || item.preco;
+        return sum + (preco * item.quantidade);
+    }, 0);
+    
+    // Monta a mensagem
+    const cliente = document.getElementById('userName')?.textContent || 'Cliente';
+    const mensagem = `🎉 *NOVO PEDIDO - FRANGO REALEZA*
+
+👤 Cliente: ${cliente}
+📄 Data: ${new Date().toLocaleString('pt-BR')}
+
+*PRODUTOS SOLICITADOS:*
+${itemsText}
+
+💰 *TOTAL: MZN ${total.toFixed(2)}*
+
+Agende a sua entrega comigo!`;
+    
+    // Codifica para URL
+    const mensagemCodificada = encodeURIComponent(mensagem);
+    
+    // Link do WhatsApp Web (seu número: +258848628400)
+    const whatsappLink = `https://wa.me/258848628400?text=${mensagemCodificada}`;
+    
+    // Abre em nova aba
+    window.open(whatsappLink, '_blank');
+    
+    // Limpa carrinho
     carrinho = [];
     saveCart();
     updateCartCount();
     toggleCart();
-    showNotification('Pedido realizado com sucesso!');
+    showNotification('Pedido enviado! Abra o WhatsApp para confirmar.');
 }
 
 // ============================================
