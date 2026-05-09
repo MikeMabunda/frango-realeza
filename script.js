@@ -11,7 +11,7 @@ const produtos = [
         preco: 300.00,
         promocao: 290.00,
         rating: 5,
-        emoji: "🐔"
+        imagem: "vivo.jpeg"
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ const produtos = [
         preco: 320.00,
         promocao: 300.00,
         rating: 5,
-        emoji: "🍗"
+        imagem: "abat.jpeg"
     },
     {
         id: 3,
@@ -31,7 +31,7 @@ const produtos = [
         preco: 3100.00,
         promocao: 3000.00,
         rating: 4.5,
-        emoji: "📦"
+        imagem: "caixadefran.jpeg"
     },
     {
         id: 4,
@@ -41,7 +41,7 @@ const produtos = [
         preco: 250.00,
         promocao: 230.00,
         rating: 4.5,
-        emoji: "🍗"
+        imagem: ""
     },
     {
         id: 5,
@@ -51,7 +51,7 @@ const produtos = [
         preco: 330.00,
         promocao: 300.00,
         rating: 5,
-        emoji: "🥩"
+        imagem: ""
     },
     {
         id: 6,
@@ -61,7 +61,7 @@ const produtos = [
         preco: 2400.00,
         promocao: 2300.00,
         rating: 4,
-        emoji: "📦"
+        imagem: "asas10k.jpeg"
     },
     {
         id: 7,
@@ -71,7 +71,7 @@ const produtos = [
         preco: 3100.00,
         promocao: 2900.00,
         rating: 4.5,
-        emoji: "📦"
+        imagem: "peitode10k.jpeg"
     },
     {
         id: 8,
@@ -81,7 +81,7 @@ const produtos = [
         preco: 885.00,
         promocao: 870.00,
         rating: 4,
-        emoji: "🐔"
+        imagem: "frango.jpeg"
     },
     {
         id: 9,
@@ -91,7 +91,7 @@ const produtos = [
         preco: 4425.00,
         promocao: 4275.00,
         rating: 5,
-        emoji: "🐔"
+        imagem: "viv1015.jpeg"
     },
     {
         id: 10,
@@ -101,7 +101,7 @@ const produtos = [
         preco: 960.00,
         promocao: 945.00,
         rating: 5,
-        emoji: "🍗"
+        imagem: "vivo3.jpeg"
     },
     {
         id: 11,
@@ -111,7 +111,7 @@ const produtos = [
         preco: 1100.00,
         promocao: 1000.00,
         rating: 4,
-        emoji: "🍗"
+        imagem: ""
     },
     {
         id: 12,
@@ -121,7 +121,7 @@ const produtos = [
         preco: 390.00,
         promocao: 370.00,
         rating: 4.5,
-        emoji: "🍗"
+        imagem: ""
     }
 ];
 
@@ -210,8 +210,8 @@ function renderCart() {
         html += `
             <div class="cart-item">
                 <div class="cart-item-info">
-                    <h4>${item.emoji} ${item.nome}</h4>
-                    <p>R$ ${preco.toFixed(2)} x ${item.quantidade}</p>
+                    <h4>${item.nome}</h4>
+                    <p>MZN ${preco.toFixed(2)} x ${item.quantidade}</p>
                 </div>
                 <div class="cart-item-actions">
                     <button onclick="updateQuantity(${item.id}, ${item.quantidade - 1})">-</button>
@@ -365,7 +365,7 @@ function createProductCard(produto) {
     return `
         <div class="product-card">
             <div class="product-image">
-                ${produto.emoji}
+                <img src="${produto.imagem}" alt="${produto.nome}" style="width: 100%; height: 250px; object-fit: cover; border-radius: 8px;">
                 ${temPromocao ? `<span class="product-badge">-${Math.round(((produto.preco - produto.promocao) / produto.preco) * 100)}%</span>` : ''}
             </div>
             <div class="product-info">
